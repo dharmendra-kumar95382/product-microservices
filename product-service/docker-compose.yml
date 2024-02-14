@@ -1,0 +1,20 @@
+
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prodcutdb
+
+  product-service:
+    container_name: product-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
